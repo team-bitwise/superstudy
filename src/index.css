@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+.heroBg{
+    background: url('./assets/heroImg1.jpg');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.uploadedHeroBg{
+    background: url('./assets/heroImg2.jpg');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
