@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 const Landing = () => {
   const [fileUpload, setFileUpload] = useState<File | null>(null)
+  const [loading, setIsLoading] = useState<boolean>(false)
 
   const [message, contextHolder] = useNotification()
   const navigate = useNavigate()
@@ -48,6 +49,7 @@ const Landing = () => {
     const formData = new FormData();
     formData.append("pdf", fileUpload)
 
+    setIsLoading(true)
     try {
       // const res = await fetch("http://localhost:5000/upload", {
       //   method: "POST",
@@ -60,6 +62,20 @@ const Landing = () => {
       //   })
       // }
 
+      const res = await fetch('https://dialogue-rap-methods-volunteers.trycloudflare.com/upload-notes', {
+        method: "POST",
+        body: formData,
+      })
+      if (res.ok) {
+        console.log("OK")
+      } else {
+        console.log("No")
+      }
+      console.log("Loading")
+
+      const data = await res.json();
+      console.log(data);
+
       message.success({
         message: "File Uploaded successfully"
       })
@@ -68,10 +84,16 @@ const Landing = () => {
         navigate(`uploaded/${fileUpload.name}`)
       }, 1000);
     } catch (err) {
+
       console.error(err);
+      setIsLoading(false)
       message.error({
         message: "Error Uploading file, Please try again."
       })
+
+    } finally {
+      console.log("loaded finish")
+      setIsLoading(false)
     }
 
   }
@@ -79,7 +101,7 @@ const Landing = () => {
   return (
     <main>
       {contextHolder}
-      <NavBar bgColor="white" textColor="black"/>
+      <NavBar bgColor="white" textColor="black" />
       <section className="heroBg w-full min-h-[80vh] flex flex-col items-center">
         <div className=" mt-8">
           <h1 className="text-3xl text-center text-white font-semibold">Because you've got better things to do than read 200 pages.</h1>
@@ -92,7 +114,7 @@ const Landing = () => {
             </div>
             <aside className="flex items-center space-x-2 bg-[#082F5A] shadow-xl text-white py-1 px-3 rounded-lg mt-6 cursor-pointer hover:opacity-70 duration-200 hover:transition-all">
               <IoCloudUploadOutline />
-              <button onClick={handleFileUpload} className="cursor-pointer">Upload PDF</button>
+              <button onClick={handleFileUpload} className="cursor-pointer" disabled={loading}>{!loading ? "Upload PDF" : "Uploading..."}</button>
             </aside>
           </span>
 
