@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { IoSend } from "react-icons/io5";
 import useNotification from 'antd/es/notification/useNotification';
-import type { ReactFormState } from 'react-dom/client';
+
 
 
 type MessageInitialState = {
@@ -58,11 +58,11 @@ const AiChat = () => {
             </nav>
 
             {/* Message section */}
-            <section className='mt-12 h-[50vh] overflow-y-auto px-24 '>
+            <section className='mt-12 h-[50vh] overflow-y-auto lg:px-24 px-6'>
                 {userMessage.map((msg, index) => (
                     <div
                         key={index}
-                        className={`max-w-[40%] px-4 py-4 mb-8 rounded-2xl ${msg.sender === "user"
+                        className={`lg:max-w-[40%] max-w-[80%] px-4 py-4 mb-8 rounded-2xl ${msg.sender === "user"
                             ? "bg-[#1D2679] text-white self-end ml-auto"
                             : "bg-[#7680DC] text-gray-900 self-start mr-auto"
                             }`}
@@ -74,7 +74,7 @@ const AiChat = () => {
             </section>
 
             {/* Input Area */}
-            <section className='mt-6 mx-auto flex items-center w-[50%] bg-white rounded-xl px-4'>
+            <section className='mt-6 mx-auto flex items-center lg:w-[50%] w-[90%] mb-4 bg-white rounded-xl px-4'>
                 <input type='text' placeholder={`Ask Danny anything about ${param.filename}`} className='w-full px-4 py-8 outline-none' onChange={(e) => setInput(e.target.value)} value={input}/>
                 <span onClick={handleSendMessage}>
                     <IoSend className='text-xl cursor-pointer' />

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import NavBar from '../../component/NavBar'
 import { useParams } from 'react-router'
 

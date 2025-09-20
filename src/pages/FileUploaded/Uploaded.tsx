@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Link, useParams } from 'react-router'
 import NavBar from '../../component/NavBar'
 import ButtonUI from '../../component/ButtonUI'

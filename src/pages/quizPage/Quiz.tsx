@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useParams } from 'react-router'
 
 const Quiz = () => {
@@ -9,7 +9,7 @@ const Quiz = () => {
                 <h1 className="text-4xl leading-none text-white text-center mx-auto">
                     Quiz Mode
                 </h1>
-                <p className='text-center mt-2 text-xl text-gray-300'>AI-generated from from your PDF</p>
+                <p className='text-center mt-2 text-xl text-gray-300'>AI-generated Quiz from '{param.filename}'</p>
             </nav>
         </main>
     )
